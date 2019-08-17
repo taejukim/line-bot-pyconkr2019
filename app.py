@@ -44,6 +44,7 @@ def get_programs(topic: str = None) -> TemplateSendMessage:
             thumbnail_image_url=program['owner']['profile']['image'],
             title=limit_len(program['name'], 40),
             text=limit_len(program['desc'], 60),
+            place= '-' if not program['place'] else program['place']['name'],
             actions=[
                 URIAction(
                     label='자세히 보기',
@@ -64,6 +65,8 @@ def get_programs(topic: str = None) -> TemplateSendMessage:
         ).json()['data']['presentations']
         if not topic or topic in program['name']
     ][:10]
+    print(dir(columns[0]))
+    print(columns[0].as_json_dict())
     return TemplateSendMessage(
         alt_text='https://www.pycon.kr/program/talks',
         template=CarouselTemplate(columns=columns)
@@ -78,7 +81,10 @@ def get_message(from_message):
             return skill(from_message)
 
     if '프로그램' in from_message:
-        return get_programs()
+        if '요약' in from_message:
+            return get_programs_summary()
+        else:
+            return get_programs()
     else:
         return get_programs(from_message)
 

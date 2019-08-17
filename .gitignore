@@ -108,3 +108,6 @@ venv.bak/
 # zappa
 zappa_settings.json
 .idea
+
+# vscode env
+.vscode

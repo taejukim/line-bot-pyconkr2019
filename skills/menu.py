@@ -31,9 +31,14 @@ def get_menu(message):
             text='안녕하세요. 파이콘 한국 2019의 행사 참여를 돕는 LINE 챗봇입니다. 궁금하신 것을 말씀해주세요!', # noqa
             actions=sorted([
                 MessageAction(label='장소', text='장소'),
-                MessageAction(label='프로그램', text='프로그램'),
+                MessageAction(label='프로그램', text='프로그램'),    
                 MessageAction(label='시간표보기', text='시간표보기'),
-                URIAction(label='홈페이지', uri='https://www.pycon.kr/')
+                MessageAction(label='가위바위보', text='가위바위보'),
+                URIAction(label='홈페이지', uri='https://www.pycon.kr/'),
+                URIAction(
+                    label='시간표',
+                    uri='https://www.pycon.kr/timetable/talks'
+                )
             ], key=lambda x: x.label, reverse=False)
         )
     )
